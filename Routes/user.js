@@ -1,7 +1,7 @@
 const express = require("express");
 const verifyAuth = require("../middlewares/verifyAuth");
 const router = express.Router();
-// const doesUserExist = require("../middlewares/doesUserExist");
+const doesUserExist = require("../middlewares/doesUserExist");
 const userController = require("../controllers/userController");
 const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
@@ -28,7 +28,7 @@ router
   .put(verifyAuth, userController.addToReadBooks)
   .delete(verifyAuth, userController.deleteInReadBooks);
 
-router.post("/login", isPasswordCorrect, loginController.login);
+router.post("/login", doesUserExist, isPasswordCorrect, loginController.login);
 
 router.post(
   "/signup",
