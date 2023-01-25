@@ -5,5 +5,6 @@ exports.getBookById = async (bookId) => {
 };
 
 exports.searchBooks = async (argObj) => {
+  delete argObj.userId;
   return await BookSchema.find(argObj);
 };
