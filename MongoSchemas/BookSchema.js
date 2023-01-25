@@ -24,6 +24,13 @@ const bookSchema = new mongoose.Schema({
   type: {
     type: String,
   },
+  isbn: {
+    type: String,
+  },
+  publisher: {
+    type: String,
+  },
+
   questions: [{ type: mongoose.Types.ObjectId, ref: "questions" }],
 });
 
