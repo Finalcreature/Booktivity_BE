@@ -4,8 +4,8 @@ exports.getAllUsers = async () => {
   return await UserSchema.find();
 };
 
-exports.getUser = async (userId) => {
-  return await UserSchema.findById(userId);
+exports.getUser = async (user) => {
+  return await UserSchema.findOne(user);
 };
 
 exports.getWishlist = async (userId, wishlist) => {
