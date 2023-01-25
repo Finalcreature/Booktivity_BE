@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
     default: "N/A",
+    enum: ["M", "F", "N/A"],
   },
   readBooks: [{ type: mongoose.Types.ObjectId, ref: "books" }],
   currentBooks: [{ type: mongoose.Types.ObjectId, ref: "books" }],
