@@ -33,7 +33,7 @@ mongoose
   });
 
 app.use("/user", userRouter);
-app.use("/user", booksRouter);
+app.use("/books", booksRouter);
 app.use("/questions", questions);
 
 app.listen(PORT, () => {

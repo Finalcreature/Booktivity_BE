@@ -21,6 +21,9 @@ const bookSchema = new mongoose.Schema({
   summary: {
     type: String,
   },
+  type: {
+    type: String,
+  },
   questions: [{ type: mongoose.Types.ObjectId, ref: "questions" }],
 });
 
