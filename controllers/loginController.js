@@ -1,5 +1,5 @@
 const Users = require("../MongoSchemas/UserSchema");
-const createToken = require("../assets/createToken");
+const createToken = require("../libs/createToken");
 
 exports.login = async (req, res) => {
   try {
