@@ -8,40 +8,31 @@ exports.getUser = async (user) => {
   return await UserSchema.findOne(user);
 };
 
-exports.getWishlist = async (userId, wishlist) => {
-  return await UserSchema.find({ userId: { $in: wishlist } });
+exports.getWishlist = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.wishlist;
 };
-exports.getCurrent = async (userId, currentBooks) => {
-  return await UserSchema.find({ userId: { $in: currentBooks } });
+exports.getCurrentBooks = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.currentBooks;
 };
-exports.getRead = async (userId, readBooks) => {
-  return await UserSchema.find({ userId: { $in: readBooks } });
-};
-
-exports.addBook = async (userId, listType, bookToAdd) => {
-  const listToUpdate = UserSchema.findById(userId);
-  listToUpdate[listType].push(bookToAdd);
-  listToUpdate.save();
+exports.getReadBooks = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.readBooks;
 };
 
 exports.createUser = async (newUser) => {
   return await newUser.save().catch((err) => err);
 };
 
-exports.removeBook = async (userId) => {
-  //   const userToGet = { _id: req.body.userId };
-  //   const userToUpdate = await userModel.getUser(userToGet);
-  //   if (userToUpdate.adopted.includes(req.body.petId)) {
-  //     userToUpdate.adopted = userToUpdate.adopted.filter(
-  //       (pet) => pet !== req.body.petId
-  //     );
-  //   } else if (userToUpdate.fostered.includes(req.body.petId)) {
-  //     userToUpdate.fostered = userToUpdate.fostered.filter(
-  //       (pet) => pet !== req.body.petId
-  //     );
-  //   }
-  //   console.log("After remove: ", userToUpdate);
-  //   const updatedUser = await User.findOneAndUpdate(userToGet, userToUpdate);
+exports.addBook = async (userId, listType, bookToAdd) => {
+  const userToUpdate = UserSchema.findById(userId);
+  userToUpdate[listType].push(bookToAdd);
+  userToUpdate.save();
 };
 
-// module.exports = [getAllUsers, getUser, getWishlist, addBook, removeBook];
+exports.removeBook = async (userId, listType, bookToDelete) => {
+  const userToUpdate = UserSchema.findById(userId);
+  userToUpdate[listType].pull(bookToDelete);
+  userToUpdate.save();
+};
