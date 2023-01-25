@@ -9,19 +9,19 @@ const hashingPassword = require("../middlewares/hashingPassword");
 const isUsernameAvailable = require("../middlewares/isUsernameAvailable");
 
 router
-  .route(":id/wishlist")
+  .route("/:id/wishlist")
   .get(verifyAuth, userController.retrieveWishlist)
   .put(verifyAuth, userController.addToWishlist)
   .delete(verifyAuth, userController.deleteInWishlist);
 
 router
-  .route(":id/currently")
+  .route("/:id/currently")
   .get(verifyAuth, userController.retrieveCurrentBooks)
   .put(verifyAuth, userController.addToCurrentBooks)
   .delete(verifyAuth, userController.deleteInCurrentBooks);
 
 router
-  .route(":id/finished")
+  .route("/:id/finished")
   .get(verifyAuth, userController.retrieveReadBooks)
   .put(verifyAuth, userController.addToReadBooks)
   .delete(verifyAuth, userController.deleteInReadBooks);

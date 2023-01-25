@@ -9,15 +9,17 @@ exports.getUser = async (user) => {
 };
 
 exports.getWishlist = async (id) => {
-  const user = await getUser({ userId: id });
+  const user = await UserSchema.findById(id);
   return user.wishlist;
 };
+
 exports.getCurrentBooks = async (id) => {
-  const user = await getUser({ userId: id });
+  const user = await UserSchema.findById(id);
   return user.currentBooks;
 };
+
 exports.getReadBooks = async (id) => {
-  const user = await getUser({ userId: id });
+  const user = await UserSchema.findById(id);
   return user.readBooks;
 };
 
@@ -26,13 +28,13 @@ exports.createUser = async (newUser) => {
 };
 
 exports.addBook = async (userId, listType, bookToAdd) => {
-  const userToUpdate = UserSchema.findById(userId);
+  const userToUpdate = await UserSchema.findById(userId);
   userToUpdate[listType].push(bookToAdd);
   userToUpdate.save();
 };
 
 exports.removeBook = async (userId, listType, bookToDelete) => {
-  const userToUpdate = UserSchema.findById(userId);
+  const userToUpdate = await UserSchema.findById(userId);
   userToUpdate[listType].pull(bookToDelete);
   userToUpdate.save();
 };
