@@ -1,7 +1,8 @@
 const express = require("express");
 const verifyAuth = require("../middlewares/verifyAuth");
 const router = express.Router();
-const doesUserExist = require("../middlewares/doesUserExist");
+// const doesUserExist = require("../middlewares/doesUserExist");
+const userController = require("../controllers/userController");
 const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
 const hashingPassword = require("../middlewares/hashingPassword");
@@ -16,9 +17,14 @@ router
 router.route(":id/finished").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 
 router.post("/login", loginController.login);
-router.post("/signup", isUsernameAvailable, hashingPassword, signupController.createUser);
+router.post(
+  "/signup",
+  isUsernameAvailable,
+  hashingPassword,
+  signupController.createUser
+);
 
-router.get("/:id", verifyAuth);
+router.get("/:id", verifyAuth, userController.getUserInfo);
 
 router.get("/", verifyAuth);
 
