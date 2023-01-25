@@ -12,19 +12,19 @@ router
   .route(":id/wishlist")
   .get(verifyAuth, userController.retrieveWishlist)
   .put(verifyAuth, userController.addToWishlist)
-  .delete(verifyAuth);
+  .delete(verifyAuth, userController.deleteInWishlist);
 
 router
   .route(":id/currently")
   .get(verifyAuth, userController.retrieveCurrentBooks)
   .put(verifyAuth, userController.addToCurrentBooks)
-  .delete(verifyAuth);
+  .delete(verifyAuth, userController.deleteInCurrentBooks);
 
 router
   .route(":id/finished")
   .get(verifyAuth, userController.retrieveReadBooks)
   .put(verifyAuth, userController.addToReadBooks)
-  .delete(verifyAuth);
+  .delete(verifyAuth, userController.deleteInReadBooks);
 
 router.post("/login", loginController.login);
 
