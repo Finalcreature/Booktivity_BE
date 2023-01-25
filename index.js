@@ -9,6 +9,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASS
 );
 
+const questions = require("./Routes/questions");
 const userRouter = require("./Routes/user");
 const booksRouter = require("./Routes/books");
 
@@ -33,6 +34,7 @@ mongoose
 
 app.use("/user", userRouter);
 app.use("/user", booksRouter);
+app.use("/questions", questions);
 
 app.listen(PORT, () => {
   console.log(`Listing on ${[PORT]}`);
