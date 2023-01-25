@@ -49,4 +49,4 @@ const questionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("question", questionSchema);
+module.exports = mongoose.model("questions", questionSchema);
