@@ -8,14 +8,17 @@ exports.getUser = async (user) => {
   return await UserSchema.findOne(user);
 };
 
-exports.getWishlist = async (userId, wishlist) => {
-  return await UserSchema.find({ userId: { $in: wishlist } });
+exports.getWishlist = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.wishlist;
 };
-exports.getCurrent = async (userId, currentBooks) => {
-  return await UserSchema.find({ userId: { $in: currentBooks } });
+exports.getCurrentBooks = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.currentBooks;
 };
-exports.getRead = async (userId, readBooks) => {
-  return await UserSchema.find({ userId: { $in: readBooks } });
+exports.getReadBooks = async (id) => {
+  const user = await getUser({ userId: id });
+  return user.readBooks;
 };
 
 exports.addBook = async (userId, listType, bookToAdd) => {

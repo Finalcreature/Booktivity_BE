@@ -2,7 +2,7 @@ const { getUser, getAllUsers } = require("../models/user");
 
 exports.getUserInfo = async () => {
   try {
-    const userInfo = await getUser(req.params.id);
+    const userInfo = await getUser({userId: req.params.id});
     if (!userInfo) {
       res.status(400).send("User doesn't exist");
       return;
