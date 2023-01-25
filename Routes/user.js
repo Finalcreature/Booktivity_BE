@@ -5,6 +5,7 @@ const doesUserExist = require("../middlewares/doesUserExist");
 const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
 const hashingPassword = require("../middlewares/hashingPassword");
+const isUsernameAvailable = require("../middlewares/isUsernameAvailable");
 
 router.route(":id/wishlist").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 router
@@ -15,7 +16,7 @@ router
 router.route(":id/finished").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 
 router.post("/login", loginController.login);
-router.post("/signup", hashingPassword, signupController.createUser);
+router.post("/signup", isUsernameAvailable, hashingPassword, signupController.createUser);
 
 router.get("/:id", verifyAuth);
 
