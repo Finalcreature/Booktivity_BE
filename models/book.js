@@ -4,6 +4,6 @@ exports.getBookById = async (bookId) => {
   return await BookSchema.findById(bookId);
 };
 
-exports.getAllBooks = async () => {
-  return await BookSchema.find();
+exports.searchBooks = async (argObj) => {
+  return await BookSchema.find(argObj);
 };
