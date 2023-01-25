@@ -13,9 +13,12 @@ exports.getUserInfo = async () => {
   }
 };
 
-exports.getUsersList = async () => {
+exports.getTop25Users = async () => {
   try {
     const allUsers = await getAllUsers();
+    allUsers
+      .sort((a, b) => b.reputationPoints - a.reputationPoints)
+      .slice(0, 25);
     res.status(200).send(allUsers);
   } catch (err) {
     res.status(500).send(err);
