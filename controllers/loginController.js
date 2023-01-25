@@ -7,7 +7,7 @@ exports.login = async (req, res) => {
 
     if (user) {
       const token = await createToken(user._id);
-      return res.status(201).send({ token: token });
+      return res.status(201).send({ user, token: token });
     }
     res.status(400).send("User doesn't exist");
   } catch (err) {
