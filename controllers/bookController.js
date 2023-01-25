@@ -1,9 +1,8 @@
 const { getBookById, searchBooks } = require("../models/book");
 
 exports.findBooks = async (req, res) => {
-  console.log(req.body);
   try {
-    const foundBooks = await searchBooks(req.query.query);
+    const foundBooks = await searchBooks(req.query);
     res.status(200).send(foundBooks);
   } catch (err) {
     res.status(500).send(err);
