@@ -1,34 +1,34 @@
 const UserSchema = require("../MongoSchemas/UserSchema");
 
-async function getAllUsers() {
+exports.getAllUsers = async () => {
   return await UserSchema.find();
-}
+};
 
-async function getUser(userId) {
+exports.getUser = async (userId) => {
   return await UserSchema.findById(userId);
-}
+};
 
-async function getWishlist(userId, wishlist) {
+exports.getWishlist = async (userId, wishlist) => {
   return await UserSchema.find({ userId: { $in: wishlist } });
-}
-async function getCurrent(userId, currentBooks) {
+};
+exports.getCurrent = async (userId, currentBooks) => {
   return await UserSchema.find({ userId: { $in: currentBooks } });
-}
-async function getRead(userId, readBooks) {
+};
+exports.getRead = async (userId, readBooks) => {
   return await UserSchema.find({ userId: { $in: readBooks } });
-}
+};
 
-async function addBook(userId, listType, bookToAdd) {
+exports.addBook = async (userId, listType, bookToAdd) => {
   const listToUpdate = UserSchema.findById(userId);
   listToUpdate[listType].push(bookToAdd);
   listToUpdate.save();
-}
+};
 
-async function createUser(newUser) {
+exports.createUser = async (newUser) => {
   return await newUser.save().catch((err) => err);
-}
+};
 
-async function removeBook(userId) {
+exports.removeBook = async (userId) => {
   //   const userToGet = { _id: req.body.userId };
   //   const userToUpdate = await userModel.getUser(userToGet);
   //   if (userToUpdate.adopted.includes(req.body.petId)) {
@@ -42,13 +42,6 @@ async function removeBook(userId) {
   //   }
   //   console.log("After remove: ", userToUpdate);
   //   const updatedUser = await User.findOneAndUpdate(userToGet, userToUpdate);
-}
+};
 
-module.exports = [
-  getAllUsers,
-  getUser,
-  getWishlist,
-  addBook,
-  removeBook,
-  createUser,
-];
+// module.exports = [getAllUsers, getUser, getWishlist, addBook, removeBook];

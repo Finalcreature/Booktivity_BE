@@ -3,10 +3,7 @@ const verifyAuth = require("../middlewares/verifyAuth");
 const router = express.Router();
 const doesUserExist = require("../middlewares/doesUserExist");
 const loginController = require("../controllers/loginController");
-
-router.get("/", verifyAuth);
-
-router.get("/:id", verifyAuth);
+const signupController = require("../controllers/signupController");
 
 router.route(":id/wishlist").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 router
@@ -17,6 +14,10 @@ router
 router.route(":id/finished").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 
 router.post("/login", doesUserExist, loginController.login);
-router.post("/signup", createUser);
+router.post("/signup", signupController.createUser);
+
+router.get("/:id", verifyAuth);
+
+router.get("/", verifyAuth);
 
 module.exports = router;
