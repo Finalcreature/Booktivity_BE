@@ -8,6 +8,7 @@ const signupController = require("../controllers/signupController");
 const hashingPassword = require("../middlewares/hashingPassword");
 const isUsernameAvailable = require("../middlewares/isUsernameAvailable");
 const isPasswordCorrect = require("../middlewares/isPasswordCorrect");
+const isEmailNew = require("../middlewares/isEmailNew");
 
 router
   .route("/:id/wishlist")
@@ -31,6 +32,7 @@ router.post("/login", isPasswordCorrect, loginController.login);
 
 router.post(
   "/signup",
+  isEmailNew,
   isUsernameAvailable,
   hashingPassword,
   signupController.createUser
