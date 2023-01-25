@@ -4,6 +4,7 @@ const router = express.Router();
 const doesUserExist = require("../middlewares/doesUserExist");
 const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
+const hashingPassword = require("../middlewares/hashingPassword");
 
 router.route(":id/wishlist").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 router
@@ -13,8 +14,8 @@ router
   .delete(verifyAuth);
 router.route(":id/finished").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 
-router.post("/login", doesUserExist, loginController.login);
-router.post("/signup", signupController.createUser);
+router.post("/login", loginController.login);
+router.post("/signup", hashingPassword, signupController.createUser);
 
 router.get("/:id", verifyAuth);
 

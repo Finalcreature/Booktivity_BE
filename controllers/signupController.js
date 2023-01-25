@@ -2,7 +2,6 @@ const Users = require("../MongoSchemas/UserSchema");
 const userModel = require("../models/user");
 
 exports.createUser = async (req, res) => {
-  return console.log(req.body);
   Users.validate({ ...req.body }).catch((e) => res.send(e.message));
   const newUser = new Users({ ...req.body });
   newUser.is_admin = false;
