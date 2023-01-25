@@ -5,6 +5,7 @@ const {
   getCurrentBooks,
   getReadBooks,
   addBook,
+  removeBook,
 } = require("../models/user");
 
 exports.getUserInfo = async (req, res) => {
@@ -82,13 +83,45 @@ exports.addToCurrentBooks = async (req, res) => {
 };
 
 exports.addToReadBooks = async (req, res) => {
-    const { id: userId } = req.params;
-    const { bookId } = req.body;
-    try {
-      const feedback = await addBook(userId, "readBooks", bookId);
-      res.status(200).send(feedback);
-    } catch (err) {
-      res.status(500).send(err);
-    }
-  };
-  
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await addBook(userId, "readBooks", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+exports.deleteInWishlist = async (req, res) => {
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await removeBook(userId, "wishlist", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+exports.deleteInCurrentBooks = async (req, res) => {
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await removeBook(userId, "currentBooks", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+exports.deleteInReadBooks = async (req, res) => {
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await removeBook(userId, "readBooks", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
