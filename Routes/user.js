@@ -7,6 +7,7 @@ const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
 const hashingPassword = require("../middlewares/hashingPassword");
 const isUsernameAvailable = require("../middlewares/isUsernameAvailable");
+const isPasswordCorrect = require("../middlewares/isPasswordCorrect");
 
 router
   .route("/:id/wishlist")
@@ -26,7 +27,7 @@ router
   .put(verifyAuth, userController.addToReadBooks)
   .delete(verifyAuth, userController.deleteInReadBooks);
 
-router.post("/login", loginController.login);
+router.post("/login", isPasswordCorrect, loginController.login);
 
 router.post(
   "/signup",
