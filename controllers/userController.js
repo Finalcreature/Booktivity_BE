@@ -4,9 +4,10 @@ const {
   getWishlist,
   getCurrentBooks,
   getReadBooks,
+  addBook,
 } = require("../models/user");
 
-exports.getUserInfo = async () => {
+exports.getUserInfo = async (req, res) => {
   try {
     const userInfo = await getUser({ userId: req.params.id });
     if (!userInfo) {
@@ -19,7 +20,7 @@ exports.getUserInfo = async () => {
   }
 };
 
-exports.getTop25Users = async () => {
+exports.getTop25Users = async (req, res) => {
   try {
     const allUsers = await getAllUsers();
     allUsers
@@ -31,7 +32,7 @@ exports.getTop25Users = async () => {
   }
 };
 
-exports.retrieveWishlist = async () => {
+exports.retrieveWishlist = async (req, res) => {
   try {
     const wishlist = await getWishlist(req.params.id);
     res.status(200).send(wishlist);
@@ -40,7 +41,7 @@ exports.retrieveWishlist = async () => {
   }
 };
 
-exports.retrieveCurrentBooks = async () => {
+exports.retrieveCurrentBooks = async (req, res) => {
   try {
     const currentBooks = await getCurrentBooks(req.params.id);
     res.status(200).send(currentBooks);
@@ -49,7 +50,7 @@ exports.retrieveCurrentBooks = async () => {
   }
 };
 
-exports.retrieveReadBooks = async () => {
+exports.retrieveReadBooks = async (req, res) => {
   try {
     const readBooks = await getReadBooks(req.params.id);
     res.status(200).send(readBooks);
@@ -57,3 +58,37 @@ exports.retrieveReadBooks = async () => {
     res.status(500).send(err);
   }
 };
+
+exports.addToWishlist = async (req, res) => {
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await addBook(userId, "wishlist", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+exports.addToCurrentBooks = async (req, res) => {
+  const { id: userId } = req.params;
+  const { bookId } = req.body;
+  try {
+    const feedback = await addBook(userId, "currentBooks", bookId);
+    res.status(200).send(feedback);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+exports.addToReadBooks = async (req, res) => {
+    const { id: userId } = req.params;
+    const { bookId } = req.body;
+    try {
+      const feedback = await addBook(userId, "readBooks", bookId);
+      res.status(200).send(feedback);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+  
