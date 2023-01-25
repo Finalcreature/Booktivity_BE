@@ -16,8 +16,9 @@ router.post("/create", (req, res) => {
   res.send(newBook);
 });
 
-router.put("/addQ", (req,res)=>[
-    
-])
+router.put("/addQ", (req, res) => {
+  const book = Book.findById(req.body.bookid);
+  console.log(book);
+});
 
 module.exports = router;
