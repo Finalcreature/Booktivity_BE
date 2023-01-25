@@ -26,6 +26,6 @@ router.post(
 
 router.get("/:id", verifyAuth, userController.getUserInfo);
 
-router.get("/", verifyAuth);
+router.get("/", verifyAuth, userController.getUsersList);
 
 module.exports = router;
