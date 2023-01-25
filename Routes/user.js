@@ -8,20 +8,22 @@ const signupController = require("../controllers/signupController");
 const hashingPassword = require("../middlewares/hashingPassword");
 const isUsernameAvailable = require("../middlewares/isUsernameAvailable");
 
-router.route(":id/wishlist")
+router
+  .route(":id/wishlist")
   .get(verifyAuth, userController.retrieveWishlist)
-  .put(verifyAuth)
+  .put(verifyAuth, userController.addToWishlist)
   .delete(verifyAuth);
 
 router
   .route(":id/currently")
   .get(verifyAuth, userController.retrieveCurrentBooks)
-  .put(verifyAuth)
+  .put(verifyAuth, userController.addToCurrentBooks)
   .delete(verifyAuth);
 
-router.route(":id/finished")
+router
+  .route(":id/finished")
   .get(verifyAuth, userController.retrieveReadBooks)
-  .put(verifyAuth)
+  .put(verifyAuth, userController.addToReadBooks)
   .delete(verifyAuth);
 
 router.post("/login", loginController.login);
