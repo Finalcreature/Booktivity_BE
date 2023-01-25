@@ -24,21 +24,31 @@ async function addBook(userId, listType, bookToAdd) {
   listToUpdate.save();
 }
 
-async function removeBook(userId) {
-  const userToGet = { _id: req.body.userId };
-  const userToUpdate = await userModel.getUser(userToGet);
-  if (userToUpdate.adopted.includes(req.body.petId)) {
-    userToUpdate.adopted = userToUpdate.adopted.filter(
-      (pet) => pet !== req.body.petId
-    );
-  } else if (userToUpdate.fostered.includes(req.body.petId)) {
-    userToUpdate.fostered = userToUpdate.fostered.filter(
-      (pet) => pet !== req.body.petId
-    );
-  }
-  console.log("After remove: ", userToUpdate);
-
-  const updatedUser = await User.findOneAndUpdate(userToGet, userToUpdate);
+async function createUser(newUser) {
+  return await newUser.save().catch((err) => err);
 }
 
-module.exports = [getAllUsers, getUser, getWishlist, addBook, removeBook];
+async function removeBook(userId) {
+  //   const userToGet = { _id: req.body.userId };
+  //   const userToUpdate = await userModel.getUser(userToGet);
+  //   if (userToUpdate.adopted.includes(req.body.petId)) {
+  //     userToUpdate.adopted = userToUpdate.adopted.filter(
+  //       (pet) => pet !== req.body.petId
+  //     );
+  //   } else if (userToUpdate.fostered.includes(req.body.petId)) {
+  //     userToUpdate.fostered = userToUpdate.fostered.filter(
+  //       (pet) => pet !== req.body.petId
+  //     );
+  //   }
+  //   console.log("After remove: ", userToUpdate);
+  //   const updatedUser = await User.findOneAndUpdate(userToGet, userToUpdate);
+}
+
+module.exports = [
+  getAllUsers,
+  getUser,
+  getWishlist,
+  addBook,
+  removeBook,
+  createUser,
+];

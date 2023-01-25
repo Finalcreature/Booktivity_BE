@@ -1,6 +1,8 @@
 const express = require("express");
 const verifyAuth = require("../middlewares/verifyAuth");
 const router = express.Router();
+const doesUserExist = require("../middlewares/doesUserExist");
+const loginController = require("../controllers/loginController");
 
 router.get("/", verifyAuth);
 
@@ -14,7 +16,7 @@ router
   .delete(verifyAuth);
 router.route(":id/finished").get(verifyAuth).put(verifyAuth).delete(verifyAuth);
 
-router.post("/login");
-router.post("/signup");
+router.post("/login", doesUserExist, loginController.login);
+router.post("/signup", createUser);
 
 module.exports = router;
