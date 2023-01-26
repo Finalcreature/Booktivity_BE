@@ -9,10 +9,10 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASS
 );
 
-const questions = require("./Routes/questions");
+const questionsRouter = require("./Routes/questions");
 const userRouter = require("./Routes/user");
 const booksRouter = require("./Routes/books");
-const { default: axios } = require("axios");
+const modelRouter = require("./Routes/model");
 
 const app = express();
 
@@ -39,13 +39,8 @@ mongoose
 
 app.use("/user", userRouter);
 app.use("/books", booksRouter);
-app.use("/questions", questions);
-app.get("/ds", (req, res) => {
-  console.log("Trying to reach model");
-  axios
-    .get(" http://35.158.92.150:8080/my_user?user_id=11400")
-    .then((res) => console.log(res.data));
-});
+app.use("/questions", questionsRouter);
+app.use("/model", modelRouter);
 
 app.listen(PORT, () => {
   console.log(`Listing on ${[PORT]}`);
