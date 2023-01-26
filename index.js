@@ -43,7 +43,7 @@ app.use("/questions", questions);
 app.get("/ds", (req, res) => {
   console.log("Trying to reach model");
   axios
-    .get("http://172.31.25.211:8080/my_user?user_id=11400")
+    .get(" http://35.158.92.150:8080/my_user?user_id=11400")
     .then((res) => console.log(res.data));
 });
 
