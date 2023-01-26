@@ -14,6 +14,7 @@ async function verifyAuth(req, res, next) {
     }
     if (decoded) {
       req.body.userId = decoded.userId;
+
       next();
     }
   });

@@ -9,17 +9,19 @@ exports.getUser = async (user) => {
 };
 
 exports.getWishlist = async (id) => {
-  const user = await UserSchema.findById(id);
+  console.log(id);
+  const user = await UserSchema.findById(id).populate("wishlist");
+  console.log(user);
   return user.wishlist;
 };
 
 exports.getCurrentBooks = async (id) => {
-  const user = await UserSchema.findById(id);
-  return user.currentBooks;
+  const user = await UserSchema.findById(id).populate("currentBooks");
+  return user;
 };
 
 exports.getReadBooks = async (id) => {
-  const user = await UserSchema.findById(id);
+  const user = await UserSchema.findById(id).populate("readBooks");
   return user.readBooks;
 };
 

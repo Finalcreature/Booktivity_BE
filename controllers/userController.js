@@ -34,8 +34,10 @@ exports.getTop25Users = async (req, res) => {
 };
 
 exports.retrieveWishlist = async (req, res) => {
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log("BODY", req.body);
   try {
-    const wishlist = await getWishlist(req.params.id);
+    const wishlist = await getWishlist(req.body.userId);
     res.status(200).send(wishlist);
   } catch (err) {
     res.status(500).send(err);
