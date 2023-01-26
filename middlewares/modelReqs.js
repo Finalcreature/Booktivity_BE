@@ -29,4 +29,4 @@ async function getCultureBook(req, res) {
 //     res.send(books);
 //   }
 
-module.exports = { getUserBooks };
+module.exports = { getUserBooks, getCultureBook };

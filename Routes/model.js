@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getUserBooks, getOtherCulture } = require("../middlewares/modelReqs");
+const { getUserBooks, getCultureBook } = require("../middlewares/modelReqs");
 
-router.get("/", getUserBooks, getOtherCulture);
+router.get("/", getUserBooks, getCultureBook);
 
 module.exports = router;
