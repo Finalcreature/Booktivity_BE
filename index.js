@@ -37,8 +37,9 @@ app.use("/user", userRouter);
 app.use("/books", booksRouter);
 app.use("/questions", questions);
 app.get("/ds", (req, res) => {
+  console.log("Trying to reach model");
   axios
-    .get("http://52.59.250.133:8080/my_user?user_id=11400")
+    .get("http://172.31.25.211:8080/my_user?user_id=11400")
     .then((res) => console.log(res.data));
 });
 
